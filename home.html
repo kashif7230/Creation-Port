@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CreationPort - Create Professional Portfolios</title>
+  <style>
+    /* Base styles */
+    :root {
+      --background: #1a1a24;
+      --foreground: #ffffff;
+      --primary: #1e1e2d;
+      --primary-light: #252536;
+      --primary-dark: #151520;
+      --secondary: #17c3e6;
+      --accent: #9f22ff;
+      --muted: #2a2a3d;
+      --muted-foreground: #cccccc;
+      --border: #2a2a3d;
+      --border-light: rgba(255, 255, 255, 0.1);
+      --radius: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* Common utilities */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .gap-2 {
+      gap: 0.5rem;
+    }
+
+    .gap-4 {
+      gap: 1rem;
+    }
+
+    .gap-6 {
+      gap: 1.5rem;
+    }
+
+    .gap-8 {
+      gap: 2rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .w-full {
+      width: 100%;
+    }
+
+    .max-w-md {
+      max-width: 28rem;
+    }
+
+    .max-w-3xl {
+      max-width: 48rem;
+    }
+
+    .mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .my-4 {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .my-8 {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+
+    .mb-6 {
+      margin-bottom: 1.5rem;
+    }
+
+    .mb-8 {
+      margin-bottom: 2rem;
+    }
+
+    .mb-12 {
+      margin-bottom: 3rem;
+    }
+
+    .mt-4 {
+      margin-top: 1rem;
+    }
+
+    .mt-8 {
+      margin-top: 2rem;
+    }
+
+    .mt-12 {
+      margin-top: 3rem;
+    }
+
+    .mt-16 {
+      margin-top: 4rem;
+    }
+
+    .py-2 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .py-6 {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .py-8 {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .py-16 {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .py-20 {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .px-6 {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .px-8 {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .pt-20 {
+      padding-top: 5rem;
+    }
+
+    .pb-16 {
+      padding-bottom: 4rem;
+    }
+
+    .relative {
+      position: relative;
+    }
+
+    .absolute {
+      position: absolute;
+    }
+
+    .inset-0 {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .z-0 {
+      z-index: 0;
+    }
+
+    .z-10 {
+      z-index: 10;
+    }
+
+    .z-50 {
+      z-index: 50;
+    }
+
+    .grid {
+      display: grid;
+    }
+
+    .grid-cols-1 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .rounded-md {
+      border-radius: 0.375rem;
+    }
+
+    .rounded-lg {
+      border-radius: var(--radius);
+    }
+
+    .rounded-xl {
+      border-radius: 0.875rem;
+    }
+
+    .rounded-full {
+      border-radius: 9999px;
+    }
+
+    .border {
+      border: 1px solid var(--border);
+    }
+
+    .border-t {
+      border-top: 1px solid var(--border-light);
+    }
+
+    .overflow-hidden {
+      overflow: hidden;
+    }
+
+    .shadow-lg {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .backdrop-blur-md {
+      backdrop-filter: blur(12px);
+    }
+
+    .bg-primary {
+      background-color: var(--primary);
+    }
+
+    .bg-primary-light {
+      background-color: var(--primary-light);
+    }
+
+    .bg-accent {
+      background-color: var(--accent);
+    }
+
+    .bg-secondary {
+      background-color: var(--secondary);
+    }
+
+    .bg-white {
+      background-color: white;
+    }
+
+    .bg-black {
+      background-color: black;
+    }
+
+    .bg-transparent {
+      background-color: transparent;
+    }
+
+    .text-white {
+      color: white;
+    }
+
+    .text-neutral-200 {
+      color: #e5e5e5;
+    }
+
+    .text-neutral-300 {
+      color: #d4d4d4;
+    }
+
+    .text-neutral-400 {
+      color: #a3a3a3;
+    }
+
+    .text-secondary {
+      color: var(--secondary);
+    }
+
+    .text-accent {
+      color: var(--accent);
+    }
+
+    .font-medium {
+      font-weight: 500;
+    }
+
+    .font-bold {
+      font-weight: 700;
+    }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    .text-3xl {
+      font-size: 1.875rem;
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+    }
+
+    .text-6xl {
+      font-size: 3.75rem;
+    }
+
+    .leading-tight {
+      line-height: 1.25;
+    }
+
+    .leading-relaxed {
+      line-height: 1.625;
+    }
+
+    .tracking-tight {
+      letter-spacing: -0.025em;
+    }
+
+    .underline {
+      text-decoration: underline;
+    }
+
+    .transition-colors {
+      transition-property: color, background-color, border-color;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+
+    .transition-all {
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+
+    .hover\:bg-accent:hover {
+      background-color: var(--accent);
+    }
+
+    .hover\:bg-accent\/80:hover {
+      background-color: rgba(159, 34, 255, 0.8);
+    }
+
+    .hover\:text-accent:hover {
+      color: var(--accent);
+    }
+
+    .hover\:text-secondary:hover {
+      color: var(--secondary);
+    }
+
+    .hover\:underline:hover {
+      text-decoration: underline;
+    }
+
+    .hover\:-translate-y-1:hover {
+      transform: translateY(-0.25rem);
+    }
+
+    /* Video Background */
+    .video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -10;
+    }
+
+    .video-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1;
+    }
+
+    .video-container video {
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+
+    /* Components */
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background-color: rgba(30, 30, 45, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+      z-index: 50;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--foreground);
+    }
+
+    .navbar .logo-container {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: var(--accent);
+      border-radius: var(--radius);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .navbar .logo-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top right, var(--accent), var(--secondary));
+      opacity: 0.8;
+    }
+
+    .navbar .logo-text {
+      position: relative;
+      font-weight: bold;
+      font-size: 1.25rem;
+      color: white;
+    }
+
+    .navbar .brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: -0.025em;
+    }
+
+    .navbar .gradient-text {
+      background: linear-gradient(to right, var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .navbar nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .navbar nav a {
+      font-weight: 500;
+      color: var(--foreground);
+      text-decoration: none;
+      transition: color 0.2s;
+      padding: 0.5rem 0;
+      position: relative;
+    }
+
+    .navbar nav a:hover {
+      color: var(--secondary);
+    }
+
+    .navbar nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--secondary);
+      transition: width 0.3s;
+    }
+
+    .navbar nav a:hover::after {
+      width: 100%;
+    }
+
+    .navbar .auth-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .navbar .login-button {
+      color: var(--foreground);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .navbar .login-button:hover {
+      color: var(--secondary);
+    }
+
+    .navbar .signup-button {
+      background-color: var(--accent);
+      color: white;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+
+    .navbar .signup-button:hover {
+      background-color: rgba(159, 34, 255, 0.8);
+    }
+
+    .mobile-menu-button {
+      display: none;
+    }
+
+    /* Hero section */
+    .hero {
+      padding-top: 8rem;
+      padding-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--neutral-200);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .hero-highlight {
+      position: relative;
+      display: inline-block;
+      padding: 0 0.5rem;
+      margin: 0 0.25rem;
+    }
+
+    .hero-highlight::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(159, 34, 255, 0.2);
+      border-radius: 0.25rem;
+      transform: rotate(-1deg);
+    }
+
+    .hero-highlight-text {
+      position: relative;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-button {
+      padding: 0.75rem 1.5rem;
+      font-weight: 500;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-size: 1.125rem;
+    }
+
+    .hero-button-primary {
+      background-color: var(--accent);
+      color: white;
+      transition: background-color 0.2s;
+    }
+
+    .hero-button-primary:hover {
+      background-color: rgba(159, 34, 255, 0.8);
+    }
+
+    .hero-button-secondary {
+      background-color: transparent;
+      color: white;
+      border: 1px solid var(--border-light);
+      transition: background-color 0.2s;
+    }
+
+    .hero-button-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      max-width: 48rem;
+      margin: 4rem auto 0;
+    }
+
+    .hero-stat {
+      background-color: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(4px);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .hero-stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-stat-label {
+      color: var(--neutral-300);
+    }
+
+    .hero-decoration {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(40px);
+      z-index: -1;
+    }
+
+    .hero-decoration-1 {
+      top: 25%;
+      right: 0;
+      width: 16rem;
+      height: 16rem;
+      background-color: rgba(159, 34, 255, 0.2);
+    }
+
+    .hero-decoration-2 {
+      bottom: 0;
+      left: 2.5rem;
+      width: 18rem;
+      height: 18rem;
+      background-color: rgba(23, 195, 230, 0.2);
+    }
+
+    /* Templates section */
+    .templates {
+      padding: 5rem 0;
+      background-color: var(--primary);
+      position: relative;
+    }
+
+    .templates::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .template-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .template-filter {
+      background-color: var(--primary-light);
+      color: white;
+      border: none;
+      border-radius: 9999px;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .template-filter:hover {
+      background-color: var(--primary);
+    }
+
+    .template-filter.active {
+      background-color: var(--accent);
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 1.5rem;
+    }
+
+    .template-card {
+      background-color: var(--primary-light);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .template-card:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: 0 4px 20px rgba(159, 34, 255, 0.2);
+    }
+
+    .template-image-container {
+      position: relative;
+    }
+
+    .template-image {
+      width: 100%;
+      height: 14rem;
+      object-fit: cover;
+    }
+
+    .template-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--primary), transparent);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .template-card:hover .template-overlay {
+      opacity: 1;
+    }
+
+    .template-overlay-name {
+      font-weight: 500;
+    }
+
+    .template-add-button {
+      background-color: var(--secondary);
+      color: var(--primary);
+      border: none;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .template-info {
+      padding: 1rem;
+    }
+
+    .template-name {
+      font-weight: 500;
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .template-description {
+      color: var(--neutral-300);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .template-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .template-category {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--secondary);
+    }
+
+    .template-preview-button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .template-preview-button:hover {
+      color: var(--accent);
+    }
+
+    .templates-view-all {
+      display: inline-flex;
+      align-items: center;
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 3rem;
+      transition: color 0.2s;
+    }
+
+    .templates-view-all:hover {
+      color: var(--accent);
+    }
+
+    .templates-view-all svg {
+      margin-left: 0.5rem;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--primary);
+      padding-top: 4rem;
+      padding-bottom: 2rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      text-decoration: none;
+    }
+
+    .footer-logo-box {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: var(--accent);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-description {
+      color: var(--neutral-300);
+      margin-bottom: 1rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer-social-link {
+      color: var(--neutral-300);
+      transition: color 0.2s;
+    }
+
+    .footer-social-link:hover {
+      color: var(--secondary);
+    }
+
+    .footer-heading {
+      font-weight: 500;
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-link {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-link a {
+      color: var(--neutral-300);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-link a:hover {
+      color: var(--secondary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-light);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copyright {
+      color: var(--neutral-400);
+      font-size: 0.875rem;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-legal-link {
+      color: var(--neutral-400);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer-legal-link:hover {
+      color: var(--secondary);
+    }
+
+    /* Forms */
+    .card {
+      background-color: rgba(37, 37, 54, 0.8);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      backdrop-filter: blur(12px);
+    }
+
+    .card-header {
+      padding: 1.5rem 1.5rem 0.5rem;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .card-description {
+      text-align: center;
+      color: var(--neutral-300);
+      margin-top: 0.25rem;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-footer {
+      padding: 0.5rem 1.5rem 1.5rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .form-label {
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+
+    .form-input {
+      padding: 0.75rem;
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      color: white;
+      width: 100%;
+    }
+
+    .form-input:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .password-input-wrapper {
+      position: relative;
+    }
+
+    .password-toggle-button {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--neutral-400);
+      cursor: pointer;
+    }
+
+    .form-message {
+      font-size: 0.75rem;
+      color: #f87171;
+    }
+
+    .form-button {
+      padding: 0.75rem;
+      font-weight: 500;
+      font-size: 1rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .form-button-primary {
+      background-color: var(--accent);
+      color: white;
+    }
+
+    .form-button-primary:hover {
+      background-color: rgba(159, 34, 255, 0.8);
+    }
+
+    .form-text {
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    .form-link {
+      color: var(--accent);
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+
+    .form-link:hover {
+      color: rgba(159, 34, 255, 0.8);
+    }
+
+    /* Responsive */
+    @media (min-width: 640px) {
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .template-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-stats {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hero h1 {
+        font-size: 3.75rem;
+      }
+
+      .navbar .auth-buttons .login-button {
+        display: inline-block;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        padding: 0 2rem;
+      }
+
+      .template-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar nav {
+        display: none;
+      }
+
+      .mobile-menu-button {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-brand {
+        grid-column: span 2;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .template-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Video Background -->
+  <div class="video-container">
+    <video autoplay muted loop playsinline>
+      <source src="port_v1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container flex items-center justify-between py-4">
+      <!-- Logo -->
+      <a href="/" class="logo">
+        <div class="logo-container">
+          <span class="logo-bg"></span>
+          <span class="logo-text">CP</span>
+        </div>
+        <span class="brand">Creation<span class="gradient-text">Port</span></span>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav>
+        <a href="/templates.html">Templates</a>
+        <a href="other.html">Features</a>
+        <a href="other.html">Showcase</a>
+        <a href="other.html">Pricing</a>
+        <a href="/about.html">About</a>
+      </nav>
+      
+      <!-- Auth Buttons -->
+      <div class="auth-buttons">
+        <a href="login.html" class="login-button">Log In</a>
+        <a href="/signup.html" class="signup-button">Get Started</a>
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-button">
+          <!-- Hamburger icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1>
+            Create a wonderful 
+            <span class="hero-highlight">
+              <span class="hero-highlight-text">portfolio</span>
+            </span> 
+            in minutes
+          </h1>
+          
+          <p>
+            Build a professional portfolio website that showcases your work and skills without writing a single line of code. Choose from premium templates and customize to your brand.
+          </p>
+          
+          <div class="hero-buttons">
+            <a href="/templates.html" class="hero-button hero-button-primary">
+              Explore Templates
+            </a>
+            <a href="howitwork.html" class="hero-button hero-button-secondary">
+              How It Works
+            </a>
+          </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-value">10+</div>
+            <div class="hero-stat-label">Portfolios Created</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">50+</div>
+            <div class="hero-stat-label">Templates</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">99%</div>
+            <div class="hero-stat-label">Satisfaction</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">24/7</div>
+            <div class="hero-stat-label">Support</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Decorative Elements -->
+      <div class="hero-decoration hero-decoration-1"></div>
+      <div class="hero-decoration hero-decoration-2"></div>
+    </section>
+
+    <!-- Templates Section -->
+    <section class="templates" id="templates">
+      <div class="container">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">Premium Portfolio Templates</h2>
+          <p class="text-lg text-neutral-200">Choose from our curated collection of professionally designed templates</p>
+        </div>
+        
+        <!-- Filters -->
+        <div class="template-filters">
+          <button class="template-filter active">All</button>
+          <button class="template-filter">Photography</button>
+          <button class="template-filter">Design</button>
+          <button class="template-filter">Development</button>
+          <button class="template-filter">Architecture</button>
+          <button class="template-filter">Art</button>
+        </div>
+        
+        <!-- Template Grid -->
+        <div class="template-grid">
+          <!-- Template Card 1 -->
+          <div class="template-card">
+            <div class="template-image-container">
+              <img src="photo1.jpg" alt="Minimalist portfolio template" class="template-image">
+              <div class="template-overlay">
+                <span class="template-overlay-name">Minimalist</span>
+                <button class="template-add-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="template-info">
+              <h3 class="template-name">Minimalist</h3>
+              <p class="template-description">Clean and simple portfolio design perfect for showcasing your work</p>
+              <div class="template-footer">
+                <span class="template-category">Design</span>
+                <button class="template-preview-button">Preview</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Template Card 2 -->
+          <div class="template-card">
+            <div class="template-image-container">
+              <img src="photo2.jpg" alt="Photography portfolio template" class="template-image">
+              <div class="template-overlay">
+                <span class="template-overlay-name">Aperture</span>
+                <button class="template-add-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="template-info">
+              <h3 class="template-name">Aperture</h3>
+              <p class="template-description">Showcase your photography with this elegant gallery-focused template</p>
+              <div class="template-footer">
+                <span class="template-category">Photography</span>
+                <button class="template-preview-button">Preview</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Template Card 3 -->
+          <div class="template-card">
+            <div class="template-image-container">
+              <img src="photo3.jpg" alt="Developer portfolio template" class="template-image">
+              <div class="template-overlay">
+                <span class="template-overlay-name">CodeFolio</span>
+                <button class="template-add-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="template-info">
+              <h3 class="template-name">CodeFolio</h3>
+              <p class="template-description">Perfect for developers with project cards and GitHub integration</p>
+              <div class="template-footer">
+                <span class="template-category">Development</span>
+                <button class="template-preview-button">Preview</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-12">
+          <a href="templates.html" class="templates-view-all">
+            View all templates
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add more sections here from components/landing -->
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="/" class="footer-logo">
+              <div class="footer-logo-box">
+                <span class="logo-bg"></span>
+                <span class="logo-text">CP</span>
+              </div>
+              <span class="brand">Creation<span class="gradient-text">Port</span></span>
+            </a>
+            <p class="footer-description">Create wonderful portfolio websites that showcase your work and impress clients.</p>
+            <div class="footer-social">
+              <a href="#" class="footer-social-link">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path>
+                </svg>
+              </a>
+              <a href="#" class="footer-social-link">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                </svg>
+              </a>
+              <a href="#" class="footer-social-link">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          
+          <div>
+            <h4 class="footer-heading">Product</h4>
+            <ul class="footer-links">
+              <li class="footer-link"><a href="templates.html">Website Templates</a></li>
+              <li class="footer-link"><a href="#">Domains</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="footer-heading">Solutions</h4>
+            <ul class="footer-links">
+              <li class="footer-link"><a href="#">Photography</a></li>
+              <li class="footer-link"><a href="#">Restaurants</a></li>
+              <li class="footer-link"><a href="#">Wedding</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="footer-heading">Support</h4>
+            <ul class="footer-links">
+              <li class="footer-link"><a href="#">Help Center</a></li>
+              <li class="footer-link"><a href="#">Forum</a></li>
+              <li class="footer-link"><a href="#">Hire an Expert</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="footer-heading">Company</h4>
+            <ul class="footer-links">
+              <li class="footer-link"><a href="about.html">About</a></li>
+              <li class="footer-link"><a href="#">Careers</a></li>
+              <li class="footer-link"><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p class="footer-copyright">© 2025 CreationPort. All rights reserved.</p>
+          <div class="footer-legal">
+            <a href="#" class="footer-legal-link">Privacy Policy</a>
+            <a href="#" class="footer-legal-link">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - CreationPort</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: #1a1a24;
+      color: #ffffff;
+    }
+
+    /* Video Background */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -10;
+      overflow: hidden;
+    }
+
+    .video-background video {
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: -5;
+    }
+
+    /* Main container */
+    .container {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    /* Logo styles */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #9f22ff, #17c3e6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      color: #ffffff;
+      transition: transform 0.3s;
+    }
+
+    .logo-container:hover .logo-icon {
+      transform: scale(1.05);
+    }
+
+    .brand-name {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .gradient-text {
+      background: linear-gradient(to right, #9f22ff, #17c3e6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Card styles */
+    .card {
+      background-color: rgba(37, 37, 54, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      padding: 24px 24px 0;
+      text-align: center;
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .card-description {
+      color: #cccccc;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .card-content {
+      padding: 24px;
+    }
+
+    .card-footer {
+      padding: 0 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+
+    /* Form styles */
+    .form-item {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      position: relative;
+    }
+
+    .input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: #ffffff;
+      font-size: 14px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: #9f22ff;
+      box-shadow: 0 0 0 3px rgba(159, 34, 255, 0.2);
+    }
+
+    .input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .password-input {
+      padding-right: 40px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #aaaaaa;
+      cursor: pointer;
+      display: flex;
+      padding: 4px;
+    }
+
+    .toggle-password:hover {
+      color: #ffffff;
+    }
+
+    /* Button styles */
+    .button {
+      width: 100%;
+      background: linear-gradient(to right, #9f22ff, #17c3e6);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.3s, transform 0.2s;
+      margin-top: 8px;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .button:active {
+      transform: translateY(0);
+    }
+
+    .button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Links */
+    .text-link {
+      color: #17c3e6;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+
+    .text-link:hover {
+      color: #9f22ff;
+      text-decoration: underline;
+    }
+
+    .text-sm {
+      font-size: 14px;
+    }
+
+    /* Error message */
+    .error-message {
+      color: #ff4d7c;
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+
+    /* Alert message */
+    .alert {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .alert-error {
+      background-color: rgba(255, 77, 124, 0.1);
+      border: 1px solid rgba(255, 77, 124, 0.2);
+      color: #ff4d7c;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 480px) {
+      .container {
+        max-width: 100%;
+      }
+      
+      .card {
+        border-radius: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Video Background -->
+  <div class="video-background">
+    <video autoplay muted loop playsinline>
+      <source src="port_v1.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <div class="container">
+    <a href="/" class="logo-container">
+      <div class="logo-icon">CP</div>
+      <span class="brand-name">Creation<span class="gradient-text">Port</span></span>
+    </a>
+
+    <div class="card">
+      <div class="card-header">
+        <h1 class="card-title">Login</h1>
+        <p class="card-description">
+          Enter your email and password to access your account
+        </p>
+      </div>
+      
+      <div class="card-content">
+        <div class="alert alert-error" id="loginAlert"></div>
+        
+        <form id="loginForm">
+          <div class="form-item">
+            <label class="form-label" for="email">Email</label>
+            <div class="form-control">
+              <input 
+                class="input" 
+                id="email" 
+                name="email" 
+                type="email" 
+                placeholder="youname@gmail.com" 
+                required
+              />
+              <div class="error-message" id="emailError">Please enter a valid email address</div>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <label class="form-label" for="password">Password</label>
+            <div class="form-control">
+              <input 
+                class="input password-input" 
+                id="password" 
+                name="password" 
+                type="password" 
+                placeholder="••••••••" 
+                required
+              />
+              <button 
+                type="button" 
+                class="toggle-password" 
+                onclick="togglePasswordVisibility()"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+              <div class="error-message" id="passwordError">Password must be at least 6 characters</div>
+            </div>
+          </div>
+
+          <button type="submit" class="button" id="loginButton">Login</button>
+        </form>
+      </div>
+      
+      <div class="card-footer">
+        <div class="text-sm">
+          <a href="#" class="text-link">Forgot your password?</a>
+        </div>
+        <div class="text-sm">
+          Don't have an account? 
+          <a href="signup.html" class="text-link">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+  
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBSo7PPXsf_cdnEaUYP6MFD4Uww5jvRdKk",
+      authDomain: "creation-port.firebaseapp.com",
+      databaseURL: "https://creation-port-default-rtdb.firebaseio.com",
+      projectId: "creation-port",
+      storageBucket: "creation-port.firebasestorage.app",
+      messagingSenderId: "70098598998",
+      appId: "1:70098598998:web:11b6cf4d8cdf2cbfdc4ff7",
+      measurementId: "G-E17W6K23SM"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+  
+    // Toggle password visibility
+    window.togglePasswordVisibility = function() {
+      const passwordInput = document.getElementById('password');
+      const eyeIcon = document.querySelector('.toggle-password svg');
+  
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.innerHTML = `
+          <path d="M17.94 17.94A10.07..."></path>
+          <line x1="1" y1="1" x2="23" y2="23"></line>`;
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.innerHTML = `
+          <path d="M1 12s4-8 11-8..."></path>
+          <circle cx="12" cy="12" r="3"></circle>`;
+      }
+    };
+  
+    function showAlert(message) {
+      const alertEl = document.getElementById('loginAlert');
+      alertEl.textContent = message;
+      alertEl.style.display = 'block';
+    }
+  
+    function hideAlert() {
+      document.getElementById('loginAlert').style.display = 'none';
+    }
+  
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      hideAlert();
+  
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+  
+      const emailError = document.getElementById('emailError');
+      const passwordError = document.getElementById('passwordError');
+      let isValid = true;
+  
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      emailError.style.display = emailRegex.test(email) ? 'none' : 'block';
+      passwordError.style.display = password.length >= 6 ? 'none' : 'block';
+  
+      isValid = emailRegex.test(email) && password.length >= 6;
+  
+      if (isValid) {
+        const loginButton = document.getElementById('loginButton');
+        loginButton.textContent = 'Logging in...';
+        loginButton.disabled = true;
+  
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            console.log('Login successful', userCredential);
+            window.location.href = 'create.html';
+          })
+          .catch((error) => {
+            console.error('Login error:', error.message);
+            showAlert('Login failed. Please check your credentials and try again.');
+            loginButton.textContent = 'Login';
+            loginButton.disabled = false;
+          });
+      }
+    });
+  </script>
+  
+</body>
+</html>

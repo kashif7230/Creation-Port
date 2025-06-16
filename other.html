@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CreationPort - Showcase, Features, and Pricing</title>
+  <style>
+    /* Base styles */
+    :root {
+      --background: #1a1a24;
+      --foreground: #ffffff;
+      --primary: #1e1e2d;
+      --primary-light: #252536;
+      --primary-dark: #151520;
+      --secondary: #17c3e6;
+      --accent: #9f22ff;
+      --muted: #2a2a3d;
+      --muted-foreground: #cccccc;
+      --neutral-100: #f5f5f5;
+      --neutral-200: #e5e5e5;
+      --neutral-300: #d4d4d4;
+      --neutral-400: #a3a3a3;
+      --border: #2a2a3d;
+      --border-light: rgba(255, 255, 255, 0.1);
+      --radius: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.5;
+    }
+
+    /* Common utilities */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .py-20 {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    .py-10 {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .py-8 {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .py-6 {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .px-6 {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .px-3 {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    .p-6 {
+      padding: 1.5rem;
+    }
+
+    .p-4 {
+      padding: 1rem;
+    }
+
+    .mt-2 {
+      margin-top: 0.5rem;
+    }
+
+    .mt-4 {
+      margin-top: 1rem;
+    }
+
+    .mt-6 {
+      margin-top: 1.5rem;
+    }
+
+    .mt-8 {
+      margin-top: 2rem;
+    }
+
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+
+    .mb-6 {
+      margin-bottom: 1.5rem;
+    }
+
+    .mb-8 {
+      margin-bottom: 2rem;
+    }
+
+    .mb-10 {
+      margin-bottom: 2.5rem;
+    }
+
+    .mb-16 {
+      margin-bottom: 4rem;
+    }
+
+    .mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .max-w-3xl {
+      max-width: 48rem;
+    }
+
+    .max-w-4xl {
+      max-width: 56rem;
+    }
+
+    .max-w-6xl {
+      max-width: 72rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    .text-3xl {
+      font-size: 1.875rem;
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+    }
+
+    .font-medium {
+      font-weight: 500;
+    }
+
+    .font-semibold {
+      font-weight: 600;
+    }
+
+    .font-bold {
+      font-weight: 700;
+    }
+
+    .italic {
+      font-style: italic;
+    }
+
+    .text-secondary {
+      color: var(--secondary);
+    }
+
+    .text-accent {
+      color: var(--accent);
+    }
+
+    .text-white {
+      color: var(--foreground);
+    }
+
+    .text-neutral-300 {
+      color: var(--neutral-300);
+    }
+
+    .text-muted-foreground {
+      color: var(--muted-foreground);
+    }
+
+    .underline {
+      text-decoration: underline;
+    }
+
+    .no-underline {
+      text-decoration: none;
+    }
+
+    .bg-primary {
+      background-color: var(--primary);
+    }
+
+    .bg-primary-light {
+      background-color: var(--primary-light);
+    }
+
+    .bg-primary-dark {
+      background-color: var(--primary-dark);
+    }
+
+    .bg-secondary {
+      background-color: var(--secondary);
+    }
+
+    .bg-accent {
+      background-color: var(--accent);
+    }
+
+    .bg-muted {
+      background-color: var(--muted);
+    }
+
+    .bg-primary-light\/50 {
+      background-color: rgba(37, 37, 54, 0.5);
+    }
+
+    .bg-primary-light\/80 {
+      background-color: rgba(37, 37, 54, 0.8);
+    }
+
+    .bg-secondary\/20 {
+      background-color: rgba(23, 195, 230, 0.2);
+    }
+
+    .bg-secondary\/10 {
+      background-color: rgba(23, 195, 230, 0.1);
+    }
+
+    .bg-accent\/20 {
+      background-color: rgba(159, 34, 255, 0.2);
+    }
+
+    .bg-accent\/10 {
+      background-color: rgba(159, 34, 255, 0.1);
+    }
+
+    .bg-mesh {
+      background-color: var(--background);
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+      position: relative;
+    }
+
+    .bg-gradient-to-r {
+      background: linear-gradient(to right, var(--accent), var(--secondary));
+    }
+
+    .backdrop-blur-md {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .rounded-md {
+      border-radius: 0.375rem;
+    }
+
+    .rounded-lg {
+      border-radius: 0.5rem;
+    }
+
+    .rounded-xl {
+      border-radius: 0.75rem;
+    }
+
+    .rounded-full {
+      border-radius: 9999px;
+    }
+
+    .border {
+      border-width: 1px;
+      border-style: solid;
+    }
+
+    .border-t {
+      border-top-width: 1px;
+      border-top-style: solid;
+    }
+
+    .border-b {
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+    }
+
+    .border-accent {
+      border-color: var(--accent);
+    }
+
+    .border-secondary {
+      border-color: var(--secondary);
+    }
+
+    .border-neutral-400\/10 {
+      border-color: rgba(163, 163, 163, 0.1);
+    }
+
+    .border-neutral-400\/20 {
+      border-color: rgba(163, 163, 163, 0.2);
+    }
+
+    .shadow-lg {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .shadow-accent\/20 {
+      box-shadow: 0 10px 15px -3px rgba(159, 34, 255, 0.2), 0 4px 6px -2px rgba(159, 34, 255, 0.1);
+    }
+
+    .overflow-hidden {
+      overflow: hidden;
+    }
+
+    .relative {
+      position: relative;
+    }
+
+    .absolute {
+      position: absolute;
+    }
+
+    .inset-0 {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .bottom-0 {
+      bottom: 0;
+    }
+
+    .right-0 {
+      right: 0;
+    }
+
+    .top-1\/2 {
+      top: 50%;
+    }
+
+    .left-0 {
+      left: 0;
+    }
+
+    .z-0 {
+      z-index: 0;
+    }
+
+    .z-10 {
+      z-index: 10;
+    }
+
+    .w-full {
+      width: 100%;
+    }
+
+    .max-w-full {
+      max-width: 100%;
+    }
+
+    .h-full {
+      height: 100%;
+    }
+
+    .h-px {
+      height: 1px;
+    }
+
+    .h-0\.5 {
+      height: 0.125rem;
+    }
+
+    .w-20 {
+      width: 5rem;
+    }
+
+    .h-20 {
+      height: 5rem;
+    }
+
+    .w-24 {
+      width: 6rem;
+    }
+
+    .h-24 {
+      height: 6rem;
+    }
+
+    .w-10 {
+      width: 2.5rem;
+    }
+
+    .h-10 {
+      height: 2.5rem;
+    }
+
+    .w-16 {
+      width: 4rem;
+    }
+
+    .h-16 {
+      height: 4rem;
+    }
+
+    .-translate-y-1\/2 {
+      transform: translateY(-50%);
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .inline-flex {
+      display: inline-flex;
+    }
+
+    .grid {
+      display: grid;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .items-start {
+      align-items: flex-start;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .gap-2 {
+      gap: 0.5rem;
+    }
+
+    .gap-4 {
+      gap: 1rem;
+    }
+
+    .gap-6 {
+      gap: 1.5rem;
+    }
+
+    .gap-8 {
+      gap: 2rem;
+    }
+
+    .gap-y-4 {
+      row-gap: 1rem;
+    }
+
+    .space-y-2 > * + * {
+      margin-top: 0.5rem;
+    }
+
+    .space-y-4 > * + * {
+      margin-top: 1rem;
+    }
+
+    .space-y-6 > * + * {
+      margin-top: 1.5rem;
+    }
+
+    .space-y-8 > * + * {
+      margin-top: 2rem;
+    }
+
+    /* Button styles */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, var(--accent), var(--secondary));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(159, 34, 255, 0.2), 0 4px 6px -2px rgba(159, 34, 255, 0.1);
+    }
+
+    .btn-secondary {
+      background-color: var(--primary-light);
+      color: var(--foreground);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary);
+      border-color: var(--accent);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid currentColor;
+      color: var(--foreground);
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-lg {
+      padding: 0.875rem 1.75rem;
+      font-size: 1.125rem;
+    }
+
+    /* Card styles */
+    .card {
+      background-color: var(--primary-light);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(159, 34, 255, 0.3), 0 10px 10px -5px rgba(159, 34, 255, 0.2);
+      border-color: var(--accent);
+    }
+
+    .card-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-footer {
+      padding: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    /* Badge styles */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 9999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.025em;
+    }
+
+    .badge-secondary {
+      background-color: var(--secondary);
+      color: var(--primary-dark);
+    }
+
+    .badge-accent {
+      background-color: var(--accent);
+      color: white;
+    }
+
+    .badge-outline {
+      background-color: transparent;
+      border: 1px solid currentColor;
+    }
+
+    /* Features section specific styles */
+    .feature-icon-wrapper {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .feature-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+    }
+
+    /* Pricing section specific styles */
+    .pricing-card {
+      transition: all 0.3s ease;
+      position: relative;
+      height: 100%;
+    }
+
+    .pricing-card.popular {
+      border-color: var(--accent);
+      transform: scale(1.05);
+      z-index: 1;
+    }
+
+    .pricing-card.popular:hover {
+      transform: scale(1.05) translateY(-5px);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -10px;
+      right: 20px;
+    }
+
+    .pricing-price {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .pricing-price-currency {
+      font-size: 1.5rem;
+      vertical-align: super;
+      font-weight: 500;
+      margin-right: 0.25rem;
+    }
+
+    .pricing-price-month {
+      font-size: 1rem;
+      color: var(--muted-foreground);
+      font-weight: 400;
+    }
+
+    .pricing-features {
+      list-style-type: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+
+    .pricing-feature {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .pricing-feature-icon {
+      color: var(--secondary);
+      margin-right: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    /* Showcase specific styles */
+    .showcase-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .showcase-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .showcase-item:hover .showcase-img {
+      transform: scale(1.05);
+    }
+
+    .showcase-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      padding: 2rem 1.5rem 1.5rem;
+      transition: opacity 0.3s ease;
+    }
+
+    .showcase-category {
+      display: inline-block;
+      background-color: var(--secondary);
+      color: var(--primary-dark);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      margin-bottom: 0.5rem;
+    }
+
+    .showcase-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .showcase-desc {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+
+    /* Responsive grid utilities */
+    .grid-cols-1 {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    @media (min-width: 640px) {
+      .sm\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      
+      .sm\:flex-row {
+        flex-direction: row;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      
+      .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      
+      .md\:flex-row {
+        flex-direction: row;
+      }
+      
+      .md\:text-left {
+        text-align: left;
+      }
+      
+      .md\:text-4xl {
+        font-size: 2.25rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      
+      .lg\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      
+      .lg\:block {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Showcase Section -->
+  <section id="showcase" class="py-20 bg-mesh">
+    <div class="container mx-auto">
+      <div class="max-w-3xl mx-auto text-center mb-16">
+        <span class="inline-block px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm font-medium mb-4">Showcase</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Amazing portfolios created with CreationPort</h2>
+        <p class="text-lg text-muted-foreground">Discover how professionals across different industries showcase their work</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Showcase Item 1 -->
+        <div class="showcase-item card card-hover">
+          <div class="overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1505489435671-80a165c60816?auto=format&fit=crop&w=600&q=80" alt="Design Portfolio" class="showcase-img">
+          </div>
+          <div class="showcase-overlay">
+            <span class="showcase-category">Design</span>
+            <h3 class="showcase-title">Minimal Design Portfolio</h3>
+            <p class="showcase-desc">A clean, minimalist approach to showcasing UI/UX design work</p>
+          </div>
+        </div>
+        
+        <!-- Showcase Item 2 -->
+        <div class="showcase-item card card-hover">
+          <div class="overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Photography Portfolio" class="showcase-img">
+          </div>
+          <div class="showcase-overlay">
+            <span class="showcase-category">Photography</span>
+            <h3 class="showcase-title">Urban Photography</h3>
+            <p class="showcase-desc">Street photography capturing the essence of city life</p>
+          </div>
+        </div>
+        
+        <!-- Showcase Item 3 -->
+        <div class="showcase-item card card-hover">
+          <div class="overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80" alt="Development Portfolio" class="showcase-img">
+          </div>
+          <div class="showcase-overlay">
+            <span class="showcase-category">Development</span>
+            <h3 class="showcase-title">Full-Stack Developer</h3>
+            <p class="showcase-desc">A comprehensive portfolio of web and mobile applications</p>
+          </div>
+        </div>
+        
+        <!-- Showcase Item 4 -->
+        <div class="showcase-item card card-hover">
+          <div class="overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1534359265607-b2e5c7c67d44?auto=format&fit=crop&w=600&q=80" alt="Art Portfolio" class="showcase-img">
+          </div>
+          <div class="showcase-overlay">
+            <span class="showcase-category">Art</span>
+            <h3 class="showcase-title">Abstract Expressionism</h3>
+            <p class="showcase-desc">Contemporary paintings exploring form and color</p>
+          </div>
+        </div>
+        
+        <!-- Showcase Item 5 -->
+        <div class="showcase-item card card-hover">
+          <div class="overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=600&q=80" alt="Architecture Portfolio" class="showcase-img">
+          </div>
+          <div class="showcase-overlay">
+            <span class="showcase-category">Architecture</span>
+            <h3 class="showcase-title">Modern Structures</h3>
+            <p class="showcase-desc">Innovative architectural designs with sustainable focus</p>
+          </div>
+        </div>
+        
+        <!-- Showcase Item 6 -->
+        <div class="showcase-item card card-hover">
+          <div class="overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&w=600&q=80" alt="Writing Portfolio" class="showcase-img">
+          </div>
+          <div class="showcase-overlay">
+            <span class="showcase-category">Writing</span>
+            <h3 class="showcase-title">Creative Writer</h3>
+            <p class="showcase-desc">A collection of short stories, essays, and published works</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-16">
+        <a href="signup.html" class="btn btn-primary btn-lg">Create Your Portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 bg-primary">
+    <div class="container mx-auto">
+      <div class="max-w-3xl mx-auto text-center mb-16">
+        <span class="inline-block px-3 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium mb-4">Features</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything you need to showcase your work</h2>
+        <p class="text-lg text-muted-foreground">Powerful tools to create a professional online presence</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="p-6 bg-primary-light/50 backdrop-blur-md rounded-xl border border-neutral-400/10">
+          <div class="feature-icon-wrapper bg-secondary/10">
+            <svg class="feature-icon text-secondary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Responsive Templates</h3>
+          <p class="text-neutral-300">All our templates are fully responsive and look great on any device, from mobile to desktop.</p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="p-6 bg-primary-light/50 backdrop-blur-md rounded-xl border border-neutral-400/10">
+          <div class="feature-icon-wrapper bg-accent/10">
+            <svg class="feature-icon text-accent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Customization</h3>
+          <p class="text-neutral-300">Personalize your portfolio with custom colors, fonts, and layouts to match your personal brand.</p>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="p-6 bg-primary-light/50 backdrop-blur-md rounded-xl border border-neutral-400/10">
+          <div class="feature-icon-wrapper bg-secondary/10">
+            <svg class="feature-icon text-secondary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Domain Integration</h3>
+          <p class="text-neutral-300">Connect your custom domain for a more professional and branded online presence.</p>
+        </div>
+        
+        <!-- Feature 4 -->
+        <div class="p-6 bg-primary-light/50 backdrop-blur-md rounded-xl border border-neutral-400/10">
+          <div class="feature-icon-wrapper bg-accent/10">
+            <svg class="feature-icon text-accent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <polyline points="1 12 4 15 7 12"></polyline>
+              <polyline points="17 12 20 15 23 12"></polyline>
+              <path d="M4 15v-3a8 8 0 0 1 16 0v3"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">SEO Optimization</h3>
+          <p class="text-neutral-300">Built-in SEO tools to help your portfolio rank higher in search engines and get discovered.</p>
+        </div>
+        
+        <!-- Feature 5 -->
+        <div class="p-6 bg-primary-light/50 backdrop-blur-md rounded-xl border border-neutral-400/10">
+          <div class="feature-icon-wrapper bg-secondary/10">
+            <svg class="feature-icon text-secondary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Project Management</h3>
+          <p class="text-neutral-300">Easily add, edit, and organize your projects with our intuitive project management system.</p>
+        </div>
+        
+        <!-- Feature 6 -->
+        <div class="p-6 bg-primary-light/50 backdrop-blur-md rounded-xl border border-neutral-400/10">
+          <div class="feature-icon-wrapper bg-accent/10">
+            <svg class="feature-icon text-accent" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <line x1="22" y1="12" x2="2" y2="12"></line>
+              <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
+              <line x1="6" y1="16" x2="6.01" y2="16"></line>
+              <line x1="10" y1="16" x2="10.01" y2="16"></line>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Analytics</h3>
+          <p class="text-neutral-300">Track visitors, page views, and engagement to understand how people interact with your work.</p>
+        </div>
+      </div>
+      
+      <div class="mt-16 p-6 bg-primary-light/80 backdrop-blur-md rounded-xl border border-neutral-400/20">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+          <div class="flex-1">
+            <h3 class="text-2xl font-bold mb-4">Ready to showcase your best work?</h3>
+            <p class="mb-6 text-neutral-300">Join thousands of professionals who trust CreationPort to highlight their skills and projects online.</p>
+            <div class="flex flex-wrap gap-4">
+              <a href="signup.html" class="btn btn-primary">Get Started</a>
+              <a href="templates.html" class="btn btn-outline">Browse Templates</a>
+            </div>
+          </div>
+          <div class="hidden md:block w-24 h-24 rounded-full bg-gradient-to-r from-accent to-secondary opacity-80"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-20 bg-mesh">
+    <div class="container mx-auto">
+      <div class="max-w-3xl mx-auto text-center mb-16">
+        <span class="inline-block px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm font-medium mb-4">Pricing</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple, transparent pricing</h2>
+        <p class="text-lg text-muted-foreground">Choose the perfect plan for your needs</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Free Tier -->
+        <div class="pricing-card card p-6">
+          <div class="mb-8">
+            <h3 class="text-2xl font-bold mb-2">Free</h3>
+            <p class="text-muted-foreground">Perfect for beginners</p>
+            <div class="mt-6 mb-4">
+              <span class="pricing-price"><span class="pricing-price-currency">₹</span>0</span>
+              <span class="pricing-price-month">/forever</span>
+            </div>
+            <a href="signup.html" class="btn btn-secondary w-full">Get Started</a>
+          </div>
+          
+          <ul class="pricing-features">
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>1 portfolio site</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Basic templates</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Up to 5 projects</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Basic analytics</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>CreationPort subdomain</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Pro Tier -->
+        <div class="pricing-card card p-6 popular shadow-lg">
+          <div class="pricing-badge badge badge-secondary">Popular</div>
+          <div class="mb-8">
+            <h3 class="text-2xl font-bold mb-2">Pro</h3>
+            <p class="text-muted-foreground">For serious professionals</p>
+            <div class="mt-6 mb-4">
+              <span class="pricing-price"><span class="pricing-price-currency">₹</span>99</span>
+              <span class="pricing-price-month">/month</span>
+            </div>
+            <a href="/signup.html" class="btn btn-primary w-full">Get Started</a>
+          </div>
+          
+          <ul class="pricing-features">
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>3 portfolio sites</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>All templates</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Unlimited projects</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Advanced analytics</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Custom domain</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Remove CreationPort branding</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Priority support</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Agency Tier -->
+        <div class="pricing-card card p-6">
+          <div class="mb-8">
+            <h3 class="text-2xl font-bold mb-2">Agency</h3>
+            <p class="text-muted-foreground">For teams and businesses</p>
+            <div class="mt-6 mb-4">
+              <span class="pricing-price"><span class="pricing-price-currency">₹</span>399</span>
+              <span class="pricing-price-month">/month</span>
+            </div>
+            <a href="signup.html" class="btn btn-secondary w-full">Get Started</a>
+          </div>
+          
+          <ul class="pricing-features">
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>10 portfolio sites</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>All Pro features</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Team collaboration</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Client management</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>White label option</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>API access</span>
+            </li>
+            <li class="pricing-feature">
+              <svg class="pricing-feature-icon w-10 h-10" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Dedicated account manager</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="mt-16 max-w-4xl mx-auto p-6 bg-primary-light/50 backdrop-blur-md rounded-xl border border-neutral-400/10 text-center">
+        <h3 class="text-xl font-semibold mb-2">Need a custom solution?</h3>
+        <p class="mb-6 text-neutral-300">For enterprise companies and special requirements, we offer custom pricing tailored to your needs.</p>
+        <a href="about.html" class="btn btn-outline">Contact Sales</a>
+      </div>
+      
+      <div class="mt-16 text-center space-y-4">
+        <h3 class="text-lg font-medium">Frequently Asked Questions</h3>
+        <p class="text-muted-foreground">Have more questions? <a href="/faq" class="text-secondary underline">Visit our FAQ page</a></p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

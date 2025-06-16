@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works - CreationPort</title>
+  <style>
+    /* Base styles */
+    :root {
+      --background: #1a1a24;
+      --foreground: #ffffff;
+      --primary: #1e1e2d;
+      --primary-light: #252536;
+      --primary-dark: #151520;
+      --secondary: #17c3e6;
+      --accent: #9f22ff;
+      --muted: #2a2a3d;
+      --neutral-200: #e5e5e5;
+      --neutral-300: #d4d4d4;
+      --neutral-400: #a3a3a3;
+      --border-light: rgba(255, 255, 255, 0.1);
+      --radius: 0.75rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.5;
+    }
+
+    /* Background mesh pattern */
+    .bg-mesh {
+      background-color: var(--background);
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+      position: relative;
+    }
+
+    /* Common utilities */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .py-20 {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    .px-3 {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .px-8 {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .py-1 {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
+
+    .py-3 {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+
+    .p-6 {
+      padding: 1.5rem;
+    }
+
+    .mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+
+    .mb-16 {
+      margin-bottom: 4rem;
+    }
+
+    .mt-16 {
+      margin-top: 4rem;
+    }
+
+    .max-w-3xl {
+      max-width: 48rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    .text-3xl {
+      font-size: 1.875rem;
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+    }
+
+    .font-medium {
+      font-weight: 500;
+    }
+
+    .font-bold {
+      font-weight: 700;
+    }
+
+    .text-secondary {
+      color: var(--secondary);
+    }
+
+    .text-neutral-200 {
+      color: var(--neutral-200);
+    }
+
+    .text-neutral-300 {
+      color: var(--neutral-300);
+    }
+
+    .bg-secondary\/20 {
+      background-color: rgba(23, 195, 230, 0.2);
+    }
+
+    .bg-primary-light\/70 {
+      background-color: rgba(37, 37, 54, 0.7);
+    }
+
+    .bg-accent {
+      background-color: var(--accent);
+    }
+
+    .bg-secondary {
+      background-color: var(--secondary);
+    }
+
+    .bg-gradient-to-r {
+      background: linear-gradient(to right, var(--accent), var(--secondary));
+    }
+
+    .backdrop-blur-md {
+      backdrop-filter: blur(12px);
+    }
+
+    .rounded-full {
+      border-radius: 9999px;
+    }
+
+    .rounded-lg {
+      border-radius: 0.5rem;
+    }
+
+    .rounded-xl {
+      border-radius: 0.75rem;
+    }
+
+    .border {
+      border: 1px solid;
+    }
+
+    .border-neutral-400\/10 {
+      border-color: rgba(163, 163, 163, 0.1);
+    }
+
+    .w-16 {
+      width: 4rem;
+    }
+
+    .h-16 {
+      height: 4rem;
+    }
+
+    .h-1 {
+      height: 0.25rem;
+    }
+
+    .inline-block {
+      display: inline-block;
+    }
+
+    .inline-flex {
+      display: inline-flex;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .grid {
+      display: grid;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+
+    .gap-8 {
+      gap: 2rem;
+    }
+
+    .relative {
+      position: relative;
+    }
+
+    .absolute {
+      position: absolute;
+    }
+
+    .top-1\/2 {
+      top: 50%;
+    }
+
+    .left-0 {
+      left: 0;
+    }
+
+    .z-0 {
+      z-index: 0;
+    }
+
+    .z-10 {
+      z-index: 10;
+    }
+
+    .w-full {
+      width: 100%;
+    }
+
+    .-translate-y-1\/2 {
+      transform: translateY(-50%);
+    }
+
+    .transition-all {
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 300ms;
+    }
+
+    .hover\:shadow-lg:hover {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .hover\:shadow-accent\/20:hover {
+      box-shadow: 0 10px 15px -3px rgba(159, 34, 255, 0.2), 0 4px 6px -2px rgba(159, 34, 255, 0.1);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      .md\:px-6 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      
+      .md\:text-4xl {
+        font-size: 2.25rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .lg\:block {
+        display: block;
+      }
+      
+      .lg\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      
+      .hidden {
+        display: none;
+      }
+      
+      .lg\:block {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section id="how-it-works" class="py-20 bg-mesh">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="max-w-3xl mx-auto text-center mb-16">
+        <span class="inline-block px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm font-medium mb-4">How It Works</span>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Create your portfolio in 4 simple steps</h2>
+        <p class="text-lg text-neutral-200">Our streamlined process makes it easy to build and launch your portfolio</p>
+      </div>
+      
+      <div class="relative">
+        <!-- Progress Line -->
+        <div class="hidden lg:block absolute top-1/2 left-0 h-1 bg-gradient-to-r from-accent to-secondary w-full -translate-y-1/2 z-0"></div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 relative z-10">
+          <!-- Step 1 -->
+          <div class="bg-primary-light/70 backdrop-blur-md p-6 rounded-xl border border-neutral-400/10 flex flex-col items-center text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4 bg-accent">
+              1
+            </div>
+            <h3 class="text-xl font-bold mb-2">Choose a Template</h3>
+            <p class="text-neutral-300">Browse our collection of professionally designed templates and select one that fits your style.</p>
+          </div>
+          
+          <!-- Step 2 -->
+          <div class="bg-primary-light/70 backdrop-blur-md p-6 rounded-xl border border-neutral-400/10 flex flex-col items-center text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4 bg-gradient-to-r from-accent to-secondary">
+              2
+            </div>
+            <h3 class="text-xl font-bold mb-2">Customize Design</h3>
+            <p class="text-neutral-300">Personalize your portfolio with your colors, fonts, and layout preferences.</p>
+          </div>
+          
+          <!-- Step 3 -->
+          <div class="bg-primary-light/70 backdrop-blur-md p-6 rounded-xl border border-neutral-400/10 flex flex-col items-center text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4 bg-secondary">
+              3
+            </div>
+            <h3 class="text-xl font-bold mb-2">Add Your Content</h3>
+            <p class="text-neutral-300">Upload your projects, add descriptions, and organize your work to showcase your best pieces.</p>
+          </div>
+          
+          <!-- Step 4 -->
+          <div class="bg-primary-light/70 backdrop-blur-md p-6 rounded-xl border border-neutral-400/10 flex flex-col items-center text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4 bg-gradient-to-r from-secondary to-accent">
+              4
+            </div>
+            <h3 class="text-xl font-bold mb-2">Publish & Share</h3>
+            <p class="text-neutral-300">Launch your portfolio with one click and share it with potential clients or employers.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-16 text-center">
+        <a href="signup.html" class="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-accent to-secondary rounded-lg font-medium text-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20">
+          Start Creating Now
+        </a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
